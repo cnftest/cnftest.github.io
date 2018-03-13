@@ -216,7 +216,7 @@ $(document).ready(function(){
 
     $("#notifyMe").notifyMe();
 
-    (function() {
+    /*(function() {
 
         var dlgtrigger = document.querySelector( '[data-dialog]' ),
             somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
@@ -224,7 +224,7 @@ $(document).ready(function(){
 
         dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
 
-    })();
+    })();*/
 
     /* ------------------------------------- */
     /* 5. PhotoSwipe Gallery Init .......... */
