@@ -1,0 +1,703 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 9 ]>
+<html class="ie9"><![endif]-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#66B348">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0"/>
+
+    <link rel="manifest" href="js/manifest.json">
+    <link rel="shortcut icon" sizes="192x192" href="img/logo-l.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="gidimo">
+    <link rel="apple-touch-icon" href="img/logo.png">
+
+    <meta name="msapplication-TileImage" content="img/logo.png">
+    <meta name="msapplication-TileColor" content="#66B348">
+
+    <meta property="og:type" content="app"/>
+    <meta property="og:site_name" content="gidimo Web App"/>
+    <meta property="og:url" content="https://gidimo.com/gidimoweb/"/>
+    <meta property="og:image" content="https://storage.googleapis.com/gidimofacebook/gidimofacebook-banner.png"/>
+    <meta property="og:description" content="gidimo is Africa’s first mobile learning & personal advancement platform, here to help you seize your future!"/>
+    <meta property="og:title" content="gidimo Login"/>
+
+    <!-- search engine tags -->
+    <meta name="application-name" content="gidimo">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <meta name="rating" content="General">
+    <meta name="url" content="https://gidimo.com/gidimoweb/">
+    <meta name="description" content="gidimo is Africa’s first mobile learning & personal advancement platform, here to help you seize your future!">
+
+    <meta name="_csrf" content="f6ba2c6e-32a2-4c9c-9ec8-1ceb5f8aade2"/>
+    <meta name="_csrf_header" content="X-CSRF-TOKEN"/>
+    <meta name="ackit_version" content="v1.0"/>
+    <meta name="ackit_id" content="426608787402320"/>
+    <meta name="app-mode" content="production"/>
+
+    <meta name="google-signin-client_id"
+          content="47903570570-2a0o1v517pah9k0tgjp8hm51pn8ch00d.apps.googleusercontent.com">
+    <title>gidimo</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap-sweetalert/dist/sweetalert.css" rel="stylesheet">
+    <link href="vendor/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="vendor/intl-tel-input/build/css/intlTelInput.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/green.app.min.1.css" rel="stylesheet">
+    <link href="css/app.min.2.css" rel="stylesheet">
+    <link href="css/app-custom.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <script src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+    <script src="js/gidimo-analytics.js"></script>
+    <script src="js/iebackwardcompactibility.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+</head>
+<style>
+    .m-b-10 {
+        width: 100%
+    }
+
+    .intl-tel-input .country-list {
+        text-align: left;
+        z-index: 4;
+    }
+
+    .fg-line.has-error:after {
+        background: rgba(244, 67, 54, 0);
+    }
+
+</style>
+<body class="login-content">
+<div id="fb-root"></div>
+
+<!-- Login -->
+<div class="lc-block lcb-alt toggled hidden"
+     id="l-login">
+
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row ">
+        <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+    </div>
+
+    <div class="input-group m-b-10">
+        <div id="fSignInWrapper" class="fSignInWrapper btn-group-justified ">
+            <div id="customFacebookBtn" onclick="fb_login(event, 'login')" class="facebookBtn">
+                <span class="icon"></span>
+                <span class="buttonText">Log in with Facebook</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group m-b-10">
+        <div id="gSignInWrapper" class="gSignInWrapper btn-group-justified ">
+            <div id="googleLoginButton" class="customGPlusSignIn">
+                <span class="icon"></span>
+                <span class="buttonText">Log in with Google</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr">
+        <div></div>
+        <div>or</div>
+        <div></div>
+    </div>
+    <div class="input-group m-b-10">
+        <div id="gidiSignInWrapper" class="gidiSignInWrapper btn-group-justified ">
+            <div id="gidiBtn" data-block="#email-login" class="gidiSignIn">
+                <span class="icon"> </span>
+                <span class="buttonText">Log in with Email</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <ul class="login-navigation">
+        <li data-block="#l-register" style="color: #f44336">Sign Up</li>
+        <li data-block="#l-forget-password" style="color: #ff9800 ">Forgot password?</li>
+    </ul>
+</div>
+
+<!-- Email Login -->
+<div class="lc-block lcb-alt" id="email-login">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row">
+        <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+    </div>
+    <form id="loginForm">
+        <div id="gidiEmailWrap" class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+
+            <div class="fg-line">
+                <input type="text" name="gidimoEmail" class="form-control"
+                       placeholder="Email Address">
+            </div>
+        </div>
+
+        <div id="gidiPasswordWrap" class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
+
+            <div class="fg-line">
+                <input type="password" pattern=".{6,}" required title="6 characters minimum" name="gidimoPassword"
+                       class="form-control" placeholder="Password">
+            </div>
+        </div>
+    </form>
+
+    <div class="clearfix"></div>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="remember_me">
+            <i class="input-helper"></i>
+            Keep me signed in
+        </label>
+        <input type="hidden" name="_csrf" value="f6ba2c6e-32a2-4c9c-9ec8-1ceb5f8aade2"/>
+    </div>
+
+    <a onclick="gidimoLogin()" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+        <li data-block="#l-register" style="color: #f44336">Sign Up</li>
+        <li data-block="#l-forget-password" style="color: #ff9800 ">Forgot password?</li>
+    </ul>
+</div><!-- End Email Login -->
+
+<!-- register -->
+<div class="lc-block lcb-alt " id="l-register">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row ">
+        <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+    </div>
+    <div class="m-b-10 m-l-10 ">
+        <input id="phone" class="phone form-control " type="tel">
+    </div>
+    <div class="input-group m-b-10">
+        <div class="fSignInWrapper btn-group-justified ">
+            <div onclick="fb_login(event, 'signup')" class="facebookBtn">
+                <span class="icon"></span>
+                <span class="buttonText">Sign up with facebook</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group m-b-10">
+        <div class="gSignInWrapper btn-group-justified ">
+            <div id="googleSignUpButton" onclick="isNumberValid(event, 'signup')" class="customGPlusSignIn">
+                <span class="icon"></span>
+                <span class="buttonText">Sign up with Google</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr">
+        <div></div>
+        <div>or</div>
+        <div></div>
+    </div>
+
+    <div class="input-group m-b-10">
+
+        <div class="gidiSignInWrapper btn-group-justified ">
+            <div id="gidiSignUpBtn" data-block="#email-register" class="gidiSignIn">
+                <span class="icon"> </span>
+                <span class="buttonText">Sign up with Email</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!--  div class="input-group m-b-10">
+        <div  class="gidiSignInWrapper btn-group-justified ">
+            <div id="nopasswordlogin" data-block="#email-register" class="gidiSignIn" >
+                <span class="icon"> </span>
+                <span  class="buttonText">Sign up with no password</span>
+            </div>
+        </div>
+
+    </div-->
+
+    <div class="clearfix"></div>
+
+
+    <ul class="login-navigation">
+        <li data-block="#l-login" style="color: #4caf50">Login</li>
+        <li data-block="#l-forget-password" style="color: #ff9800 ">Forgot password?</li>
+    </ul>
+</div><!--End  register -->
+
+<!-- Email Register -->
+<div class="lc-block lcb-alt " id="email-register">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+
+    <div class="row">
+        <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+    </div>
+    <form id="signUpForm">
+
+        <div id="sNameWrap" class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+
+            <div class="row">
+                <div class=" col-xs-6 ">
+                    <div class="fg-line ">
+                        <input type="text" name="firstName" required class="form-control input-sm"
+                               placeholder="First Name">
+                    </div>
+                </div>
+
+                <div class=" col-xs-6">
+                    <div class="fg-line ">
+                        <input type="text" name="lastName" required class="form-control input-sm"
+                               placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sEmailWrap" class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+
+            <div class="fg-line">
+                <input type="text" id="signup-email" required name="email" class="form-control"
+                       placeholder="Email Address">
+            </div>
+        </div>
+
+        <div id="sPasswordWrap" class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
+
+            <div class="fg-line">
+                <input type="password" required name="password" class="form-control"
+                       placeholder="Password">
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+           <div class="checkbox m-0">
+                    <label>
+                        By using gidimo you accept our <a href='http://gidimo.com/terms-of-service.html' class='termsLink'>Terms of Use</a>  and <a href='http://gidimo.com/privacy-policy.html' class='termsLink'>Privacy Policy</a>.
+                    </label>
+                </div>
+            </form>
+
+    <a onclick="gidimoSignup();" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+        <li data-block="#l-login" style="color: #4caf50">Login</li>
+        <li data-block="#l-forget-password" style="color: #ff9800 ">Forgot password?</li>
+    </ul>
+</div>   <!-- End  Email Register -->
+
+
+<!-- Enter Phone Number -->
+<div class="lc-block lcb-alt" id="l-phone-number">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row">
+        <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+    </div>
+
+    <p id="pMessage" class="text-center">One more Thing! Enter your phone number.</p>
+
+    <div class="m-b-10 m-l-10 ">
+        <input id="ePhone" class="phone form-control " type="tel">
+    </div>
+
+    <a onclick="registerThirPartyLogin();" class="btn btn-login btn-danger btn-float"><i
+            class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+        <li data-block="#l-login" style="color: #4caf50">Login</li>
+        <li data-block="#l-forget-password" style="color: #ff9800 ">Forgot password?</li>
+    </ul>
+</div>
+
+<!-- authenticate phone Number -->
+<div class="lc-block lcb-alt" id="l-auth-phone-number">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+    <div class="row ">
+        <h4 class="text-center sms-meg">gidimo wants to verify your phone number, please enter the verification code you received by SMS</h4>
+    </div>
+    <br/>
+
+    <div class="row ">
+        <input maxlength="6" type="text" class="text-center code-input"/>
+    </div>
+    <br/>
+    <br/>
+
+    <div class="row">
+        <div class="sms-auth-nav">
+            <button data-response="later" class="btn btn-block error-btn-text" style="background: #004040; ">
+                Later
+            </button>
+        </div>
+        <div class="sms-auth-nav">
+            <button data-response="ok" class="btn btn-block error-btn-text" style="background: #66B348; ">
+                Ok
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot Password -->
+<div class="lc-block lcb-alt" id="l-forget-password">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row">
+        <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+    </div>
+
+    <p id="fpMessage" class="text-center">Enter the email address you use to sign in to gidimo and we&#39;ll send instructions to get you back on your feet.</p>
+
+    <div id="fpasswordWarp" class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+
+        <div class="fg-line">
+            <input id="uEmail" type="text" class="form-control" placeholder="Email Address">
+        </div>
+    </div>
+
+    <a onclick="fPassword()" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+        <li data-block="#l-login" style="color: #4caf50">Login</li>
+        <li data-block="#l-register" style="color: #f44336">Sign Up</li>
+    </ul>
+</div>
+
+<!-- welcome back -->
+<div class="lc-block lcb-alt toggled hidden " id="l-wback">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+    <h3 id="wMessage" class="text-center welcome-meg ">Welcome back, </h3>
+
+    <br/>
+
+    <div class="m-b-10 m-l-10 hidden">
+        <input id="wphone" class="phone form-control " type="tel" name="phonenumber">
+    </div>
+
+    <div class="input-group m-b-10 hidden">
+        <div class="fSignInWrapper btn-group-justified ">
+            <div onclick="fb_login(event, 'returningUser')" class="facebookBtn">
+                <span class="icon"></span>
+                <span class="buttonText">Log in with Facebook</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group m-b-10 hidden">
+        <div class="gSignInWrapper btn-group-justified ">
+            <div id="googleSignUpButton2" onclick="isNumberValid(event, 'returningUser')" class="customGPlusSignIn">
+                <span class="icon"></span>
+                <span class="buttonText">Log in with Google</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="gidiProvider hidden">
+        <div id="wgidiPasswordWrap" class="input-group m-b-20">
+            <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
+
+            <div class="fg-line">
+                <input type="password" pattern=".{6,}" required title="6 characters minimum" name="wgidimoPassword"
+                       class="form-control" placeholder="Password">
+            </div>
+        </div>
+        <div class="input-group m-b-10 ">
+            <div class="gidiSignInWrapper btn-group-justified ">
+                <div onclick="login(event, 'gidimo');" class="gidiSignIn" style="background: #66B348;">
+                    <span class="icon"> </span>
+                    <span class="buttonText">Login</span>
+                </div>
+            </div>
+        </div>
+        <span onclick="forgotPass();" id="forgotPas" class=" welcome-link " style="float: right">Forgot Password?</span>
+    </div>
+
+    <span id="notUser" class=" welcome-link ">Not </span>
+
+
+</div>
+
+
+<!-- Login Error-->
+<div class="lc-block lcb-alt "
+     id="l-error">
+    <div style="background: white;box-shadow: none;" class="lcb-user bgm-white"><img class="m-t-20 m-l-5"
+                                                                                     src="img/logo-m.png" alt="Gidimo">
+    </div>
+    <div class="row">
+        <div class="col-1">
+
+        </div>
+        <div class="col-10">
+            <img class="loginBackground" src="img/loginHeaderBackground.png" alt="">
+        </div>
+        <div class="col-1">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <img src="img/padlock.png" alt="">
+    </div>
+
+    <div class="row ">
+        <h5 class="text-center error-meg"></h5>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="error-nav">
+            <button data-block="#l-login" class="btn btn-block error-btn-text" style="background: #004040; ">
+                Start afresh
+            </button>
+            <script src="vendor/intl-tel-input/build/js/intlTelInput.min.js"></script>
+        </div>
+        <div class="error-nav">
+            <button data-block="#l-forget-password" class="btn btn-block error-btn-text" style="background: #8bc34a; ">
+                Forgot password?
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="message_dialog" class="w3-modal">
+    <div class="w3-modal-content w3-round-xxlarge moveCenter" style="minWidth:250px;max-width:300px">
+        <div class="w3-container">
+            <div>&nbsp;</div>
+            <p id="message_pram" style="text-align:center;font-weight:bold">Processing Please Wait.</p>
+
+            <div align="center"><img src="img/loader_preview.gif" width="100px" height="100px"></img></div>
+            <div>&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-10">
+            <div class="modal-body" style="height: 70vh;overflow-y: auto">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="ajaxError" type="hidden" value="Error occurred while trying to submit your data"/>
+<input id="phoneError" type="hidden" value="Please Enter a Valid phone number"/>
+<input type="hidden" name="gidimo_loading_event_message" value="Loading Please Wait.">
+<input type="hidden" name="gidimo_process_event_message" value="Processing Please Wait.">
+<input type="hidden" name="gidimo_fb_auth_message" value="Waiting for facebook authorization.">
+<input type="hidden" name="gidimo_google_auth_message" value="Waiting for google authorization.">
+<input type="hidden" name="fb_api_v" value="v2.0"/>
+<input type="hidden" name="fb_api_id" value="426608787402320"/>
+<input type="hidden" name="fb_api_sc" value="dc0de90aaf7bcd552cd846d887813c81"/>
+<input type="hidden" name="google_base_auth" value="https://accounts.google.com/o/oauth2/v2/auth?"/>
+<input type="hidden" name="google_base_ref" value="https://gidimo.com/gidimoweb/googleauthservice"/>
+<input type="hidden" name="google_base_domain" value="https://gidimo.com"/>
+
+<!-- Javascript Libraries -->
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendor/bootstrap-sweetalert/dist/sweetalert.min.js"></script>
+<script src="vendor/remarkable-bootstrap-notify/bootstrap-growl.min.js"></script>
+<script src="vendor/waves/dist/waves.min.js"></script>
+<script src="vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
+<script src="vendor/intl-tel-input/build/js/intlTelInput.min.js"></script>
+<script src="vendor/basil.js/src/basil.min.js"></script>
+<script src="vendor/lz-string/libs/lz-string.min.js"></script>
+
+<script src="js/app.js"></script>
+
+<script>
+    var loginbasil = new window.Basil({'namespace': 'gidimo', 'storages': ['local']});
+    $("#customFacebookBtn").addClass("disabled-div");
+    $("#googleLoginButton").addClass("disabled-div");
+    $(document).ready(function () {
+
+        if (false) {
+            sendScreenTrack('Signup');
+        } else {
+            sendScreenTrack('Login');
+        }
+        $(".phone").val("");
+        $(".phone").intlTelInput({
+            //allowExtensions: true,
+            //   autoFormat: false,
+            autoHideDialCode: false,
+            autoPlaceholder: false,
+            
+            
+            defaultCountry: "auto",
+            geoIpLookup: function (callback) {
+                callback("NG");
+            },
+            
+            
+            
+            nationalMode: false,
+            numberType: "MOBILE",
+            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            preferredCountries: ['ng', 'gh'],
+            utilsScript: "vendor/intl-tel-input/lib/libphonenumber/build/utils.js"
+        });
+        try {
+            var data = loginbasil.get('auth_data');
+            if (data) {
+                user = JSON.parse(LZString.decompress(data));
+                initView(user);
+                // document.location.href = 'login?return=true';
+            } else {
+                $('#l-login').removeClass("hidden");
+            }
+        } catch (e) {
+            $('#l-login').removeClass("hidden");
+            console.log(e);
+        }
+
+
+    });
+    function initView(user) {
+        var rootView = $('#l-wback');
+        var provider = user.provider;
+        if (provider === "Google") {
+            rootView.find(".hidden .gSignInWrapper").closest('.m-b-10').removeClass('hidden');
+        } else if (provider === "Facebook") {
+            $('#l-wback').find(".hidden .fSignInWrapper").closest('.m-b-10').removeClass('hidden');
+        } else if (provider === "gidimo") {
+            rootView.find(".gidiProvider").removeClass('hidden');
+        }
+        if (!user.verified) {
+            rootView.find("#wphone").closest('.m-b-10').removeClass('hidden');
+        }
+        $("#wMessage").append(user.name.split(' ')[0] + ".");
+        $("#notUser").append(user.name.split(' ')[0] + "?");
+        if (!"") { //if request not error req
+            $('#l-wback').removeClass('hidden');
+        } else {
+            $('#l-login').removeClass("hidden");
+        }
+    }
+    $("body").on('click', '#notUser', function (e) {
+        loginbasil.set('auth_data', "");
+        document.location.href = 'login';
+    });
+    function login(event) {
+        if (!user.verified) {
+            if (isNumberValid(event, 'returningUser')) {
+                showPhoneNumberAuthWindow();
+              /*  $('#l-wback').removeClass('toggled');
+                setTimeout(function () {
+                    $('#l-auth-phone-number').addClass('toggled');
+                });
+                sendData('publicservice/requestcontroller',
+                        {
+                            email: user.email,
+                            phoneNumber: phoneNumber,
+                            handler: 'loginRequest',
+                            requestType: 'sendVerifyCode'
+                        }, function (response, textStatus) {
+                            // console.log("#### name:: " + response.message + " ### Value:: " + response);
+                            if (textStatus === "success" && response.responsecode === 200) {
+
+                            } else {
+                                notify('', 'danger', '', $('#ajaxError').val());
+                            }
+                        });*/
+            }
+            return;
+        }
+        loginReturningUser();
+    }
+    function loginReturningUser() {
+        var pass = $("input:password[name='wgidimoPassword']").val().trim();
+        if (pass.length > 5) {
+            loginUser(user.email, pass, "gidimo");
+        } else {
+            showError("#wgidiPasswordWrap");
+        }
+    }
+    function forgotPass() {
+        $('#l-wback').removeClass('toggled');
+        setTimeout(function () {
+            $('#l-forget-password').addClass('toggled');
+        });
+    }
+
+</script>
+<!-- Placeholder for IE9 -->
+<!--[if IE 9 ]>
+    <script src="vendor/jquery-placeholder/jquery.placeholder.min.js"></script>
+<![endif]-->
+<script src="js/functions.js"></script>
+<script src="js/gidimo-login.js"></script>
+<script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+
+
+</body>
+</html>
